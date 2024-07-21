@@ -9,23 +9,27 @@ export const Auth = () => {
         const res = await fetch(`${process.env.REACT_APP_API_URL}`,
             {
                 headers: {
-                    Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}` 
+                    Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`
                 },
             });
-        return res.json();
+            const data = await res.json();
+            console.log("API Response Data:", data); 
+            return data;
     }
 
-    const { data, mutate } = useMutation({ mutationKey: ["login"], mutationFn: mutationLogin })
+    const { mutate } = useMutation({
+        mutationKey: ["login"],
+        mutationFn: mutationLogin,
+        onSuccess: (data) => {
+            localStorage.setItem("guest_session_id", data.guest_session_id);
+            navigate("/");
+        }
+    });
 
     const navigate = useNavigate();
 
     const handleLogin = async () => {
         await mutate();
-        if (data) {
-            localStorage.setItem("quest_session_id", data.guest_session_id)
-            navigate("/");
-        }
-
     }
 
     return (
