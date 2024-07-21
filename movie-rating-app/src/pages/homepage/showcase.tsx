@@ -1,11 +1,12 @@
 import React from "react";
-import { DisplayType } from ".";
+import { DisplayType } from "./index.tsx";
 
 interface DisplayData {
     id: number;
     overview: string;
     poster_path: string;
-    title: string;
+    title?: string;
+    name?: string;
     vote_average: number;
     elease_date: string;
 }
@@ -17,6 +18,12 @@ interface Props {
 
 export const ShowCase = (props: Props) => {
     return (
-        <div></div>
+        <div>
+            {props.displayType === DisplayType.Movies
+                ?
+                props.data[0].title
+                :
+                props.data[0].name}
+        </div>
     )
 }

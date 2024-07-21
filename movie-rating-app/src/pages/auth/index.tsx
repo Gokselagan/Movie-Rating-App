@@ -13,7 +13,6 @@ export const Auth = () => {
                 },
             });
             const data = await res.json();
-            console.log("API Response Data:", data); 
             return data;
     }
 
