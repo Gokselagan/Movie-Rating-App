@@ -18,8 +18,8 @@ export const HomePage = () => {
     const { data: tvShowsData, isLoading: isLoadingTvShows } = useQuery({ queryKey: ["tvshows"], queryFn: fetchTvShows })
 
     return (
-        <div style={{ marginTop: "70px", height: "auto", backgroundColor:"black" }}>
-            <Button.Group>
+        <div style={{ marginTop: "50px", height: "auto", backgroundColor:"black" }}>
+            <Button.Group style={{marginTop:"30px"}}>
                 <Button color={displayType === DisplayType.Movies ? "red" : "black"} onClick={() => setDisplayType(DisplayType.Movies)}>Movies</Button>
 
                 <Button color={displayType === DisplayType.TvShows ? "red" : "black"} onClick={() => setDisplayType(DisplayType.TvShows)}>Tv Shows</Button>

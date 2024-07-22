@@ -32,15 +32,15 @@ export const Auth = () => {
     }
 
     return (
-        <Grid textAlign="center" verticalAlign="middle" style={{ height: "100vh" }} >
+        <Grid textAlign="center" verticalAlign="middle" style={{ height: "100vh", backgroundColor:"black", margin:"0px" }} >
 
             <Grid.Column style={{ maxWidth: 450 }}>
                 <Header as="h2" color="red" textAlign="center">
                     Welcome! Login as a guest below.
                 </Header>
                 <Form size="large">
-                    <Segment stacked>
-                        <Button size="large" color="black" fluid style={{ color: "red" }} onClick={handleLogin}>Login</Button>
+                    <Segment stacked style={{backgroundColor:"red", opacity:"0.6"}}>
+                        <Button size="large" color="black" fluid style={{ color: "red", fontWeight:"800", fontSize:"1.5rem" }} onClick={handleLogin}>Login</Button>
                     </Segment>
                 </Form>
             </Grid.Column>

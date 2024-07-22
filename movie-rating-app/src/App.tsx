@@ -16,8 +16,8 @@ export const App = () => {
           <Route path='/' element={<HomePage />} />
           <Route path='/rated' element={<>Rated Page</>} />
           <Route path='/auth' element={<Auth />} />
-          <Route path='/movies/:id' element={<Movie />}/>
-          <Route path='/tvshows/:id' element={<TvShow />}/>
+          <Route path='/movie/:id' element={<Movie />}/>
+          <Route path='/tvshow/:id' element={<TvShow />}/>
         </Routes>
       </Router>
     </div>
