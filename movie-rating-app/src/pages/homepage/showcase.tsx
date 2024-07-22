@@ -1,5 +1,6 @@
 import React from "react";
 import { DisplayType } from "./index.tsx";
+import { Card, CardGroup, Grid, GridColumn } from "semantic-ui-react";
 
 interface DisplayData {
     id: number;
@@ -8,7 +9,7 @@ interface DisplayData {
     title?: string;
     name?: string;
     vote_average: number;
-    elease_date: string;
+    release_date: string;
 }
 
 interface Props {
@@ -17,13 +18,29 @@ interface Props {
 }
 
 export const ShowCase = (props: Props) => {
+
+    const { data, displayType } = props;
+
+    console.log("data", data);
+
     return (
-        <div>
-            {props.displayType === DisplayType.Movies
-                ?
-                props.data[0].title
-                :
-                props.data[0].name}
-        </div>
+        <Grid
+        columns={3}
+        stackable
+        centered
+        verticalAlign="top"
+        padded="vertically"
+        >
+            {data.map((displayData: DisplayData)=>(
+                <GridColumn key={displayData.id}>
+                    <CardGroup>
+                        <Card
+                        fluid
+                        image={`https://image.tmdb.org/t/p/original/${displayData.poster_path}`}
+                        />
+                    </CardGroup>
+                </GridColumn>
+            ))}
+        </Grid>
     )
 }
