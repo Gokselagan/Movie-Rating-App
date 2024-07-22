@@ -1,6 +1,6 @@
 import React from "react";
 import { DisplayType } from "./index.tsx";
-import { Card, CardGroup, Grid, GridColumn } from "semantic-ui-react";
+import { Card, CardContent, CardDescription, CardHeader, CardMeta, Grid, GridColumn, Image } from "semantic-ui-react";
 
 interface DisplayData {
     id: number;
@@ -25,22 +25,26 @@ export const ShowCase = (props: Props) => {
 
     return (
         <Grid
-        columns={3}
-        stackable
-        centered
-        verticalAlign="top"
-        padded="vertically"
+            columns={3}
+            stackable
+            centered
+            verticalAlign="top"
+            padded="vertically"
         >
-            {data.map((displayData: DisplayData)=>(
+            {data.map((displayData: DisplayData) => (
                 <GridColumn key={displayData.id}>
-                    <CardGroup>
-                        <Card
-                        fluid
-                        image={`https://image.tmdb.org/t/p/original/${displayData.poster_path}`}
-                        />
-                    </CardGroup>
+                    <Card>
+                        <Image src={`https://image.tmdb.org/t/p/original/${displayData.poster_path}`} />
+                        <CardContent>
+                            <CardHeader>{displayType === DisplayType.Movies ? displayData.title : displayData.name}</CardHeader>
+                            <CardMeta>{`Release Date: ${displayData.release_date} | Rating: ${displayData.vote_average}`}</CardMeta>
+                            <CardDescription>{displayData.overview.slice(0, 250) + "..."}</CardDescription>
+                        </CardContent>
+                    </Card>
                 </GridColumn>
-            ))}
+            ))
+            }
         </Grid>
     )
 }
+
