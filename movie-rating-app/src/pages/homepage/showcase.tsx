@@ -23,11 +23,13 @@ interface Props {
 export const ShowCase = (props: Props) => {
 
     const { data, displayType } = props;
-    const [rating, setRating] =useState<number>(0)
+    const [rating, setRating] =useState<number>(0);
 
-    const {} = useMutation({mutationKey: ["rateMovie"], mutationFn: (id: number)=>rateMovie(id, rating)})
+    const {mutate: rateMovieMutation} = useMutation({mutationKey: ["rateMovie"], mutationFn: (id: number)=>rateMovie(id, rating)});
 
-    const {} = useMutation({mutationKey: ["rateTvShow"], mutationFn: (id: number)=>rateTvShow(id, rating)})
+    const {mutate: rateTvShowMutation } = useMutation({mutationKey: ["rateTvShow"], mutationFn: (id: number)=>rateTvShow(id, rating)});
+
+    const rate = displayType === DisplayType.Movies ? rateMovieMutation : rateTvShowMutation;
 
     return (
         <Grid
@@ -58,9 +60,7 @@ export const ShowCase = (props: Props) => {
                                     labelPosition: "right",
                                     icon:"star",
                                     content:"Rate",
-                                    onClick: () => {
-                                        console.log(rating)
-                                    }
+                                    onClick: () => rate(displayData.id)
                                 }} />
                             </FormField>
                         </FormGroup>
