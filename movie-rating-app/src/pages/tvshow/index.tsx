@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react"
 import { useParams } from "react-router-dom"
-import { Grid, GridColumn, Header, List, ListHeader, ListItem, Loader, Segment, Image } from "semantic-ui-react";
+import { Grid, GridColumn, Header, List, ListHeader, ListItem, Loader, Segment, Image, ListDescription, Accordion, Card } from "semantic-ui-react";
 import { fetchTvShowDetails } from "./query.ts";
 
 export const TvShow = () => {
@@ -17,8 +17,22 @@ export const TvShow = () => {
         return <Loader active/>
     }
 
+    const seasonsPanels = data.seasons.map((season: any)=>({
+        key:season.id,
+        title:`Season ${season.season_number}`,
+        content :{
+            content: (
+                <Card 
+                style={{height:"70px"}}
+                meta={season.air_date}
+                description={`${season.episode_count} episodes`}
+                />
+            )
+        }
+    }))
+
     return(
-        <div style={{margin:"100px auto", maxWidth:"675px"}}>
+        <div style={{margin:"100px auto"}}>
             <Segment> 
             <Header>{data.name}</Header>
                 <Grid columns={2} divided textAlign="left" style={{marginTop:"20px"}}>
@@ -81,6 +95,16 @@ export const TvShow = () => {
                                 <ListItem>
                                     <ListHeader>Language:</ListHeader>
                                     {data.original_language}
+                                </ListItem>
+                                <ListItem>
+                                    <ListHeader>Seasons:</ListHeader>
+                                    <ListDescription style={{height:"200px", overFlowY:"scroll"}}>
+                                        <Accordion 
+                                        defaultActiveIndex={0}
+                                        panels={seasonsPanels}
+                                        styled
+                                        />
+                                    </ListDescription>
                                 </ListItem>
                             </List>
                         </GridColumn>
