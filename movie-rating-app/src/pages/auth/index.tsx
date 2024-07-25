@@ -40,7 +40,7 @@ export const Auth = () => {
                 </Header>
                 <Form size="large">
                     <Segment stacked style={{backgroundColor:"red", opacity:"0.6"}}>
-                        <Button size="large" color="black" fluid style={{ color: "red", fontWeight:"800", fontSize:"1.5rem" }} onClick={handleLogin}>Login</Button>
+                        <Button size="large" color="black" fluid style={{ color: "#fff", fontWeight:"800", fontSize:"1.5rem" }} onClick={handleLogin}>Login</Button>
                     </Segment>
                 </Form>
             </Grid.Column>
