@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { DisplayType } from "./index.tsx";
 import { Card, CardContent, CardDescription, CardHeader, CardMeta, Form, FormField, FormGroup, FormInput, Grid, GridColumn, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { rateMovie, rateTvShow } from "./mutation.ts";
 
 interface DisplayData {
     id: number;
@@ -22,6 +24,10 @@ export const ShowCase = (props: Props) => {
 
     const { data, displayType } = props;
     const [rating, setRating] =useState<number>(0)
+
+    const {} = useMutation({mutationKey: ["rateMovie"], mutationFn: (id: number)=>rateMovie(id, rating)})
+
+    const {} = useMutation({mutationKey: ["rateTvShow"], mutationFn: (id: number)=>rateTvShow(id, rating)})
 
     return (
         <Grid
