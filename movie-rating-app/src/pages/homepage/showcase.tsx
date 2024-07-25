@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { DisplayType } from "./index.tsx";
-import { Card, CardContent, CardDescription, CardHeader, CardMeta, Grid, GridColumn, Image } from "semantic-ui-react";
+import { Card, CardContent, CardDescription, CardHeader, CardMeta, Form, FormField, FormGroup, FormInput, Grid, GridColumn, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 interface DisplayData {
@@ -21,8 +21,7 @@ interface Props {
 export const ShowCase = (props: Props) => {
 
     const { data, displayType } = props;
-
-    console.log("data", data);
+    const [rating, setRating] =useState<number>(0)
 
     return (
         <Grid
@@ -37,7 +36,7 @@ export const ShowCase = (props: Props) => {
                 <GridColumn key={displayData.id}>
                     <Link to={`/${displayType === DisplayType.Movies ? "movie" : "tvshow"}/${displayData.id}`}>
                         <Card style={{ backgroundColor: "red" }}>
-                            <Image src={`https://image.tmdb.org/t/p/original/${displayData.poster_path}`} />
+                            <Image src={`https://image.tmdb.org/t/p/original/${displayData.poster_path}`} size="small" />
                             <CardContent>
                                 <CardHeader style={{ color: "white", fontWeight: "800" }}>{displayType === DisplayType.Movies ? displayData.title : displayData.name}</CardHeader>
                                 <CardMeta style={{ color: "black", fontWeight: "800" }}>{`Release Date: ${displayData.release_date} | Rating: ${displayData.vote_average}`}</CardMeta>
@@ -45,6 +44,21 @@ export const ShowCase = (props: Props) => {
                             </CardContent>
                         </Card>
                     </Link>
+                    <Form style={{marginTop:"10px"}}>
+                        <FormGroup inline>
+                            <FormField>
+                                <FormInput type="number" min="0" max="10" step="0.5" onChange={(e)=>setRating(Number(e.target.value))} action={{
+                                    color:"red",
+                                    labelPosition: "right",
+                                    icon:"star",
+                                    content:"Rate",
+                                    onClick: () => {
+                                        console.log(rating)
+                                    }
+                                }} />
+                            </FormField>
+                        </FormGroup>
+                    </Form>
                 </GridColumn>
             ))
             }
