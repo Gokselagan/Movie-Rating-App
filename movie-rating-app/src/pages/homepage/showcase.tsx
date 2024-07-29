@@ -41,7 +41,7 @@ export const ShowCase = (props: Props) => {
             style={{ margin: "0px auto", maxWidth: "1200px" }}
         >
             {data.map((displayData: DisplayData) => (
-                <GridColumn key={displayData.id}>
+                <GridColumn key={displayData.id} style={{display:"flex", alignItems:"center"}}>
                     <Link to={`/${displayType === DisplayType.Movies ? "movie" : "tvshow"}/${displayData.id}`}>
                         <Card style={{ backgroundColor: "red" }}>
                             <Image src={`https://image.tmdb.org/t/p/original/${displayData.poster_path}`} size="small" />
