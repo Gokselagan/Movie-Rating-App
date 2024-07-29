@@ -4,6 +4,7 @@ import './index.css';
 import { App } from './App.tsx';
 import "semantic-ui-css/semantic.min.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {ToastContainer} from "react-toastify";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ if (rootElement) {
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
         <App />
+        <ToastContainer />
       </QueryClientProvider>
     </React.StrictMode>
   );

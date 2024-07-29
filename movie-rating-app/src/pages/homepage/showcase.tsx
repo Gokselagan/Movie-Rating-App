@@ -4,6 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardMeta, Form, FormFie
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { rateMovie, rateTvShow } from "./mutation.ts";
+import {toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 interface DisplayData {
     id: number;
@@ -25,9 +27,27 @@ export const ShowCase = (props: Props) => {
     const { data, displayType } = props;
     const [rating, setRating] =useState<number>(0);
 
-    const {mutate: rateMovieMutation} = useMutation({mutationKey: ["rateMovie"], mutationFn: (id: number)=>rateMovie(id, rating)});
+    const onSuccess = () => {
+        toast.success("Your rated was successfully!",{
+            autoClose:2000
+        });
+    }
 
-    const {mutate: rateTvShowMutation } = useMutation({mutationKey: ["rateTvShow"], mutationFn: (id: number)=>rateTvShow(id, rating)});
+    const onError = () => {
+        toast.error("Oops something went wrong!",{
+            autoClose:4000
+        });
+    }
+ 
+    const {mutate: rateMovieMutation} = useMutation({mutationKey: ["rateMovie"], mutationFn: (id: number)=>rateMovie(id, rating),
+        onSuccess: onSuccess,
+        onError: onError,
+    });
+
+    const {mutate: rateTvShowMutation } = useMutation({mutationKey: ["rateTvShow"], mutationFn: (id: number)=>rateTvShow(id, rating),
+    onSuccess: onSuccess,
+    onError: onError,
+    });
 
     const rate = displayType === DisplayType.Movies ? rateMovieMutation : rateTvShowMutation;
 
