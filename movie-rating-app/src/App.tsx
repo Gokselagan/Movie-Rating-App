@@ -6,6 +6,7 @@ import { Auth } from './pages/auth/index.tsx';
 import { HomePage } from './pages/homepage/index.tsx';
 import { Movie } from './pages/movie/index.tsx';
 import { TvShow } from './pages/tvshow/index.tsx';
+import { Rated } from './pages/rated/index.tsx';
 
 export const App = () => {
   return (
@@ -14,7 +15,7 @@ export const App = () => {
         <Navbar />
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/rated' element={<>Rated Page</>} />
+          <Route path='/rated' element={<Rated />} />
           <Route path='/auth' element={<Auth />} />
           <Route path='/movie/:id' element={<Movie />}/>
           <Route path='/tvshow/:id' element={<TvShow />}/>
