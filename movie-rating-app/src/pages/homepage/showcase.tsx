@@ -63,11 +63,11 @@ export const ShowCase = (props: Props) => {
             {data.map((displayData: DisplayData) => (
                 <GridColumn key={displayData.id} style={{display:"flex", alignItems:"center"}}>
                     <Link to={`/${displayType === DisplayType.Movies ? "movie" : "tvshow"}/${displayData.id}`}>
-                        <Card style={{ backgroundColor: "red" }}>
+                        <Card style={{ backgroundColor: "red", height: "450px" }}>
                             <Image src={`https://image.tmdb.org/t/p/original/${displayData.poster_path}`} size="small" />
                             <CardContent>
                                 <CardHeader style={{ color: "white", fontWeight: "800" }}>{displayType === DisplayType.Movies ? displayData.title : displayData.name}</CardHeader>
-                                <CardMeta style={{ color: "black", fontWeight: "800" }}>{`Release Date: ${displayData.release_date} | Rating: ${displayData.vote_average}`}</CardMeta>
+                                <CardMeta style={{ color: "black", fontWeight: "800" }}>{`Release Date: ${displayData.release_date} | Rating: ${displayData.vote_average.toFixed(1)}`}</CardMeta>
                                 <CardDescription style={{ color: "white", fontWeight: "600" }}>{displayData.overview.slice(0, 250) + "..."}</CardDescription>
                             </CardContent>
                         </Card>
