@@ -3,7 +3,7 @@ import { Grid, Header, Form, Segment, Button } from "semantic-ui-react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
-export const Auth = () => {
+export const Auth = ({setIsLogin}) => {
 
     const mutationLogin = async () => {
         const res = await fetch(`${process.env.REACT_APP_API_URL}`,
@@ -21,7 +21,7 @@ export const Auth = () => {
         mutationFn: mutationLogin,
         onSuccess: (data) => {
             localStorage.setItem("guest_session_id", data.guest_session_id);
-            navigate("/");
+            navigate("/homepage");
         }
     });
 
@@ -29,6 +29,8 @@ export const Auth = () => {
 
     const handleLogin = async () => {
         await mutate();
+        setIsLogin(true);
+
     }
 
     return (

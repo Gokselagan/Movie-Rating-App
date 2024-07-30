@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
 import { Navbar } from './components/navbar.tsx';
@@ -9,14 +9,16 @@ import { TvShow } from './pages/tvshow/index.tsx';
 import { Rated } from './pages/rated/index.tsx';
 
 export const App = () => {
+
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   return (
     <div className="app">
       <Router>
-        <Navbar />
+        <Navbar isLogin={isLogin} setIsLogin={setIsLogin} />
         <Routes>
-          <Route path='/' element={<HomePage />} />
+          <Route path='/' element={<Auth setIsLogin={setIsLogin}/>} />
           <Route path='/rated' element={<Rated />} />
-          <Route path='/auth' element={<Auth />} />
+          <Route path='/homepage' element={<HomePage />} />
           <Route path='/movie/:id' element={<Movie />}/>
           <Route path='/tvshow/:id' element={<TvShow />}/>
         </Routes>
